@@ -1,6 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h";
 #include "BoardStruct.h";
+struct BoardStruct** LoadBoard(char* name, int* size);
+int DefaultCells(struct BoardStruct**, int);
+int BoardChecker(struct BoardStruct**, int);
+int GameOver(struct BoardStruct**, int);
+int SaveBoard(struct BoardStruct**, int);
+int GetRecords();
+int WriteRecord();
+int PrintBoard(struct BoardStruct**, int);
+struct BoardStruct** GetSaved();
 int main()
 {
 	printf("Welcome to game!\n");
@@ -25,14 +34,60 @@ int main()
 			choose[2] = jedi;
 			choose[3] = sith;
 			int size = 0;
-			struct BoardStruct** board = LoadBoard(choose[--choise], &size, board);
-			PrintBoard(board, size);
+			struct BoardStruct** board = LoadBoard(choose[--choise], &size);
+			while (1 == 1)
+			{
+				int x = 0, y = 0, num = 0;
+				char charac;
+				while (1 == 1) {
+					PrintBoard(board, size);
+					printf("Enter y or -1 to quit\n -2 for save game:");
+					scanf("%d", &x);
+					if (x == -1)
+						break;
+					if (x == -2) {
+						SaveBoard(board, size);
+						return 0;
+					}
+					printf("Enter x:");
+					scanf("%d", &y);
+					printf("Enter value (A1):");
+					scanf(" %c%d", &charac, &num);
+					charac = toupper(charac);
+					x--;
+					y--;
+					if (board[x][y].isConst != 0) {
+						if (board[x][y].num != 0) {
+							if (board[x][y].charac == ' ') {
+								board[x][y].charac = charac;
+							}
+						}
+						if (board[x][y].charac != ' ') {
+							if (board[x][y].num == 0) {
+								board[x][y].num = num;
+							}
+						}
+					}
+					else {
+						board[x][y].charac = charac;
+						board[x][y].num = num;
+					}
+					DefaultCells(board, size);
+					BoardChecker(board, size);
+					if (!GameOver(board, size)) {
+						PrintBoard(board, size);
+						printf("Congratulations!!!\n");
+						WriteRecord();
+						return 0;
+					}
+				}
+			}
 		}break;
 		case 2: {
-
+			GetSaved();
 		}break;
 		case 3: {
-
+			GetRecords();
 		}break;
 		case 4: {
 

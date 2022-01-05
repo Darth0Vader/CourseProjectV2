@@ -1,11 +1,9 @@
 #define _CRT_SECURE_NO_WARTNINGS
 #include "stdio.h";
 #include "BoardStruct.h";
-void PrintBoard(struct BoardStruct** t_board, int t_size)
+void PrintBoard(struct BoardStruct** board, int size)
 {
-	struct BoardStruct** board = t_board;
-	//memcpy(board);
-	int size = t_size;
+	//system("cls");
 	printf(" ");
 	for (int i = 0; i < size; i++) {
 		printf("   %d ", i + 1);

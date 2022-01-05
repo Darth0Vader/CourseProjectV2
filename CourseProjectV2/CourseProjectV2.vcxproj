@@ -140,10 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoardChecker.c" />
+    <ClCompile Include="DynamicArrayCreate.c" />
     <ClCompile Include="Length.c" />
     <ClCompile Include="LoadBoard.c" />
-    <ClCompile Include="LoadRecords.c" />
     <ClCompile Include="PrintBoard.c" />
+    <ClCompile Include="RecordExtension.c" />
     <ClCompile Include="Source.c" />
   </ItemGroup>
   <ItemGroup>

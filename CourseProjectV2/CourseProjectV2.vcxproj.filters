@@ -24,13 +24,16 @@
     <ClCompile Include="BoardChecker.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LoadRecords.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Length.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PrintBoard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicArrayCreate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RecordExtension.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
