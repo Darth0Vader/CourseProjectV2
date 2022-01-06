@@ -56,19 +56,13 @@ int main()
 					charac = toupper(charac);
 					x--;
 					y--;
-					if (board[x][y].isConst != 0) {
-						if (board[x][y].num != 0) {
-							if (board[x][y].charac == ' ') {
-								board[x][y].charac = charac;
-							}
-						}
-						if (board[x][y].charac != ' ') {
-							if (board[x][y].num == 0) {
-								board[x][y].num = num;
-							}
-						}
+					if (board[x][y].isConst == 2) {
+						board[x][y].charac = charac;
 					}
-					else {
+					else if (board[x][y].isConst == 1) {
+						board[x][y].num = num;
+					}
+					else if (board[x][y].isConst != 3) {
 						board[x][y].charac = charac;
 						board[x][y].num = num;
 					}
