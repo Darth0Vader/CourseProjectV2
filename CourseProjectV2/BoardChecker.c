@@ -36,7 +36,5 @@ int GameOver(struct BoardStruct** board, int size) {
 				++underCounter;
 		}
 	}
-	if (counter == 0 && underCounter == 0)
-		return 0;
-	return 1;
+	return !(counter == 0 && underCounter == 0);
 }

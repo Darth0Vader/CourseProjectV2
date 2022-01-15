@@ -23,62 +23,53 @@ struct BoardStruct** LoadBoard(char* name, int* size)
 	}
 	return board;
 }
-struct BoardStruct** GetSaved() {
+struct BoardStruct** GetSaved(int* size) {
 	struct BoardStruct** board;
 	FILE* file = fopen("saved.DarthVader", "r");
-	int i = 0;
-	char buffer[256];
-	char fileName[20] = "test";
-	while (fgets(buffer, 256, file)) {
-		printf("%d)%s\n", ++i, buffer);
+	if (file != NULL)
+	{
+		int i = 0;
+		char buffer[256];
+		char fileName[20] = "test";
+		while (fgets(buffer, 256, file)) {
+			printf("%d)%s\n", ++i, buffer);
+		}
+		printf("Enter name:");
+		scanf(" %s", &fileName);
+		fclose(file);
+		file = fopen(fileName, "r");
+		int counter = 0, x, y, num = 0, z = 0, isConst;
+		char charac;
+		int a = 0;
+		fscanf(file, "%d", size);
+		board = DynamicArrayCreate(size);
+		while (!feof(file)) {
+			fscanf(file, "%d,%d,%c,%d,%d,", &x, &y, &charac, &num, &isConst);
+			board[x][y].num = num;
+			board[x][y].charac = charac;
+			board[x][y].isConst = isConst;
+		}
+		fclose(file);
+		return board;
 	}
-	printf("Enter name:");
-	scanf(" %s", &fileName);
-	fclose(file);
-	file = fopen(fileName, "r");
-	int counter = 0, x, y, num = 0, z = 0, isConst, size = 0;
-	char charac;
-	int a = 0;
-	while (fgets(buffer, 256, file)) {
-		size = buffer[0] - '0';
-		break;
-	}
-	board = DynamicArrayCreate(size);
-	char* s;
-	while (!feof(file)) {
-		fscanf(file, "%d,%d,%c,%d,%d,%s", &x, &y, &charac, &num, &isConst, &s);
-		board[x][y].num = num;
-		board[x][y].charac = charac;
-		board[x][y].isConst = isConst;
-	}
-	fclose(file);
-	return board;
+	printf("No saved boards were found!\n");
+	return NULL;
 }
 int SaveBoard(struct BoardStruct** board, int size) {
 	printf("Enter file name(20-symbols limited):");
 	char filename[20];
-	scanf(" %s", &filename);
+	scanf("%s", &filename);
 	FILE* file = fopen("saved.DarthVader", "a");
 	if (file == NULL)
 		file = fopen("saved.DarthVader", "w+");
 	fprintf(file, "%s\n", filename);
-	char buffer[10];
+	fclose(file);
 	FILE* save = fopen(filename, "w+");
 	for (int i = 0; i < size; ++i) {
 		if (i == 0)
 			fprintf(save, "%d\n", size);
 		for (int j = 0; j < size; ++j) {
-			buffer[0] = i + '0';
-			buffer[1] = ',';
-			buffer[2] = j + '0';
-			buffer[3] = ',';
-			buffer[4] = board[i][j].charac;
-			buffer[5] = ',';
-			buffer[6] = board[i][j].num + '0';
-			buffer[7] = ',';
-			buffer[8] = board[i][j].isConst + '0';
-			buffer[9] = ',';
-			fprintf(save, "%s\n", buffer);
+			fprintf(save, "%d,%d,%c,%d,%d,\n", i, j, board[i][j].charac, board[i][j].num, board[i][j].isConst);
 		}
 	}
 	fclose(save);

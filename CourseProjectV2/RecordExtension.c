@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "stdio.h";
-#include "malloc.h";
 #include "BoardStruct.h";
 int GetRecords() {
     char buffer[256];
@@ -14,9 +13,9 @@ int GetRecords() {
 int WriteRecord() {
     printf("Enter your name sith(20-symbol limited):");
     char name[20];
-    scanf(" %s", &name);
+    scanf("%s", &name);
     FILE* file;
-    file = fopen("recordList.DarthVader", "a");
+    file = fopen("recordList.DarthVader", "a+");
     if (file == NULL) {
         file = fopen("recordList.DarthVader", "w+");
     }
