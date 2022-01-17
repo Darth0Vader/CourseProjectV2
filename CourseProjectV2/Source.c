@@ -84,6 +84,11 @@ int StartGame(struct BoardStruct** board, int size)
 			charac = toupper(charac);
 			x--;
 			y--;
+			if (num > size || charac > 64 + size)
+			{
+				printf("Value was out of range\n");
+				continue;
+			}
 			if (board[x][y].isConst == 2) {
 				board[x][y].charac = charac;
 			}
